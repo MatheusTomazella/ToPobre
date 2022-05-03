@@ -1,10 +1,17 @@
+import 'package:expensesapp/components/confirmation_dialog.dart';
 import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/utils/format_date.dart';
 import 'package:expensesapp/utils/get_first_deposit_id.dart';
 import 'package:flutter/material.dart';
+import 'package:money2/money2.dart';
 
+import '../../../components/information_dialog.dart';
+import '../../../constants/currency.dart';
+import '../../../constants/strings.dart';
 import '../../../models/expenses_table.dart';
 import '../../../services/manage_deposit_service.dart';
+import '../../../services/manage_expense_service.dart';
+import '../../../utils/clean_money_string.dart';
 import './tag_selector.dart';
 
 Future<void> showExpenseDialog({
@@ -15,15 +22,59 @@ Future<void> showExpenseDialog({
   return showDialog(
     context: context,
     builder: (context) {
-      TextEditingController _nameController = TextEditingController(
+      TextEditingController _descriptionController = TextEditingController(
         text: oldExpense?.getDescription() ?? '',
       );
-      TextEditingController _amountController = TextEditingController(
+      TextEditingController _valueController = TextEditingController(
         text: oldExpense?.getValue().toString() ?? '',
       );
       DateTime date = oldExpense?.getDate() ?? DateTime.now();
       int depositId = oldExpense?.getDepositId() ?? getFirstDepositId(table);
       List<String> tags = oldExpense?.getTags() ?? [];
+
+      Expense genNewExpense() {
+        return Expense.filled(
+          0,
+          date,
+          _descriptionController.text,
+          depositId,
+          Money.fromNum(
+            double.parse(
+              _valueController.text.isEmpty 
+                ? '0' 
+                : cleanMoneyString(_valueController.text)
+            ),
+            code: CurrencyConsts.DEFAULT_CURRENCY_CODE,
+          ),
+          tags,
+        );
+      }
+
+      bool validate() {
+        void showError(String text) {
+          showInformationDialog(
+              context: context,
+              title: StringConsts.INVALID_EXPENSE_DIALOG_TITLE,
+              text: text,
+              primaryColor: Colors.redAccent,
+              onConfirm: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              });
+        }
+
+        var value = cleanMoneyString(_valueController.text);
+
+        if (_descriptionController.text.isEmpty) {
+          showError(StringConsts.INVALID_EXPENSE_DIALOG_TEXT_EMPTY_DESCRIPTION);
+          return false;
+        } else if (double.tryParse(value.isEmpty ? '0' : value) ==
+            null) {
+          showError(StringConsts.INVALID_EXPENSE_DIALOG_TEXT_INVALID_VALUE);
+          return false;
+        } 
+        return true;
+      }
 
       return StatefulBuilder(
         builder: (context, setState) {
@@ -31,15 +82,19 @@ Future<void> showExpenseDialog({
               ManageDepositService.getDepositIdsAndNames(context, table);
 
           return AlertDialog(
-            title: Text("Title of Dialog"),
+            title: Text(
+              oldExpense != null
+              ? StringConsts.EDIT_EXPENSE_DIALOG_TITLE
+              : StringConsts.NEW_EXPENSE_DIALOG_TITLE
+            ),
             scrollable: true,
             content: SingleChildScrollView(
                 child: ListBody(
               children: [
                 TextField(
-                  controller: _nameController,
+                  controller: _descriptionController,
                   decoration: const InputDecoration(
-                    labelText: "Expense name",
+                    labelText: StringConsts.NEW_EXPENSE_DIALOG_DESCRIPTION_LABEL,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -79,9 +134,9 @@ Future<void> showExpenseDialog({
                   },
                 ),
                 TextField(
-                  controller: _amountController,
+                  controller: _valueController,
                   decoration: const InputDecoration(
-                    labelText: "Expense amount",
+                    labelText: StringConsts.NEW_EXPENSE_DIALOG_VALUE_LABEL,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -96,13 +151,33 @@ Future<void> showExpenseDialog({
               ],
             )),
             actions: <Widget>[
-              TextButton(
+              OutlinedButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text("Cancel"),
+                child: const Text(StringConsts.NEW_EXPENSE_DIALOG_CANCEL_BUTTON_TEXT),
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text("Change"),
+              ElevatedButton(
+                onPressed: () {
+                  showConfirmationDialog(
+                    context: context,
+                    title: StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TITLE,
+                    text: oldExpense == null
+                        ? StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TEXT
+                        : StringConsts.EDIT_EXPENSE_CONFIMATION_DIALOG_TEXT,
+                    onConfirm: () {
+                      if (!validate()) return;
+                      if (oldExpense == null) {
+                        ManageExpenseService.addExpenseToTable(
+                            context, table, genNewExpense());
+                      } else {
+                        ManageExpenseService.updateExpense(
+                            context, table, oldExpense, genNewExpense());
+                      }
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+                child: const Text(StringConsts.NEW_EXPENSE_DIALOG_CONFIRM_BUTTON_TEXT),
               ),
             ],
           );

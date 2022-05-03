@@ -23,8 +23,7 @@ class TagSelector extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.fromLTRB(20, 0, 0, 15),
           child: Text(
-            // TODO: Localize
-            'Tags',
+            StringConsts.TABLE_CONFIG_TAG_TITLE,
             style: TextStyle(
                 color: Colors.black54,
                 fontSize: 20,

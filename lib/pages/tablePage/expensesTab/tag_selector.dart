@@ -21,7 +21,6 @@ class TagSelector extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Wrap(
-          spacing: 10,
           children: table.tagList
               .map(
                 (e) => ExpenseTagChip(

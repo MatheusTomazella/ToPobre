@@ -48,6 +48,9 @@ class StringConsts {
   static const String DEPOSIT_AFTER_TABLE_TITLE = "Depósitos Descontado";
   static const String EXPENSES_TABLE_TITLE = "Despesas";
 
+  // Table Configurations
+  static const String TABLE_CONFIG_TAG_TITLE = "Etiquetas";
+
   // Rename Dialog
   static const String RENAME_DIALOG_TITLE = "Renomear";
   static const String RENAME_DIALOG_PLACEHOLDER = "Novo nome";
@@ -174,4 +177,29 @@ class StringConsts {
       "O valor anterior não é válido.";
   static const String INVALID_DEPOSIT_DIALOG_TEXT_INVALID_INCREMENT =
       "O valor adicionado não é válido.";
+
+  // New Expense Dialog
+  static const String NEW_EXPENSE_DIALOG_TITLE = "Nova despesa";
+  static const String NEW_EXPENSE_DIALOG_DESCRIPTION_LABEL = "Descrição";
+  static const String NEW_EXPENSE_DIALOG_DESCRIPTION_PLACEHOLDER =
+      "Descrição da despesa";
+  static const String NEW_EXPENSE_DIALOG_VALUE_LABEL = "Valor";
+  static const String NEW_EXPENSE_DIALOG_VALUE_PLACEHOLDER = "Valor da despesa";
+  static const String NEW_EXPENSE_DIALOG_CONFIRM_BUTTON_TEXT = "Salvar";
+  static const String NEW_EXPENSE_DIALOG_CANCEL_BUTTON_TEXT = "Cancelar";
+  // Edit Expense Dialog
+  static const String EDIT_EXPENSE_DIALOG_TITLE = "Editar despesa";
+  // Confirmation Dialog (new)
+  static const String NEW_EXPENSE_CONFIRMATION_DIALOG_TITLE = "Salvar despesa?";
+  static const String NEW_EXPENSE_CONFIRMATION_DIALOG_TEXT =
+      "Tem certeza que deseja criar uma nova despesa?\n";
+  // Confirmation Dialog (edit)
+  static const String EDIT_EXPENSE_CONFIMATION_DIALOG_TEXT =
+      "Tem certeza que deseja salvar essas alterações?\n";
+  // Error Dialog
+  static const String INVALID_EXPENSE_DIALOG_TITLE = "Erro";
+  static const String INVALID_EXPENSE_DIALOG_TEXT_EMPTY_DESCRIPTION =
+      "A descrição não pode ser vazia.";
+  static const String INVALID_EXPENSE_DIALOG_TEXT_INVALID_VALUE =
+      "O valor não é válido.";  
 }

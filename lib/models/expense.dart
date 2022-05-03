@@ -48,6 +48,14 @@ class Expense extends TableRecord {
     setTags(expense.getTags());
   }
 
+  void update (Expense expense) {
+    setDate(expense.getDate());
+    setDescription(expense.getDescription());
+    setDepositId(expense.getDepositId());
+    setValue(expense.getValue());
+    setTags(expense.getTags());
+  }
+
   DateTime getDate() => _date;
   String getFormattedDate() => formatDate(_date);
   void setDate(DateTime date) => _date = date;
@@ -67,7 +75,7 @@ class Expense extends TableRecord {
   Money getValue() => _value;
   void setValue(Money value) => _value = value;
 
-  List<String> getTags() => _tags;
+  List<String> getTags() => _tags..sort();
   void setTags(List<String> tags) {
     _tags = tags;
   }

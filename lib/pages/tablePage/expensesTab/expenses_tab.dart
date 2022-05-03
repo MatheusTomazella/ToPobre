@@ -32,7 +32,7 @@ class ExpensesTab extends StatelessWidget {
               child: ExpensesDataTable.usingRows(
                 headers: ExpensesTableBuilderService.getHeaders(),
                 rows: ExpensesTableBuilderService.getRows(
-                    table.expenseList, table, (List<String> row) {
+                    table.expenseList..sort(((a, b) => a.getDate().compareTo(b.getDate()))), table, (List<String> row) {
                   showExpenseDialog(
                     context: context,
                     table: table,
