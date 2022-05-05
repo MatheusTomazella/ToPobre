@@ -1,5 +1,5 @@
 import 'package:expensesapp/constants/color.dart';
-import 'package:expensesapp/utils/color_from_rgb_string.dart';
+import 'package:expensesapp/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/strings.dart';

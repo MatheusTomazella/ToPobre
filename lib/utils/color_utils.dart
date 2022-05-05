@@ -11,3 +11,19 @@ Color colorFromRgbString(String rgbString) {
   int b = int.parse(rgbList[2]);
   return Color.fromARGB(1, r, g, b);
 }
+
+extension ColorExtension on String {
+  Color toColor() {
+    return colorFromRgbString(this);
+  }
+}
+
+String rgbStringFromColor(Color color) {
+  return '${color.red},${color.green},${color.blue}';
+}
+
+extension RgbStringExtension on Color {
+  String toRgbString() {
+    return rgbStringFromColor(this);
+  }
+}
