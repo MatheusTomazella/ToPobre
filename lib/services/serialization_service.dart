@@ -8,13 +8,17 @@ import '../models/deposit.dart';
 import '../models/expense.dart';
 import '../models/income.dart';
 
-class SerializationService {}
+class SerializationService {
+  static String serializeTableList(List<ExpensesTable> tables) {
+    return jsonEncode(tables.map((table) => table.toJson()).toList());
+  }
+}
 
 extension TableSerializationExtension on ExpensesTable {
   toJson() {
     return jsonEncode(<String, dynamic>{
       'name': getName(),
-      'creationDate': getCreationDate().toString(),
+      'creationDate': getCreationDate().toIso8601String(),
       'favorite': getFavorite().toString(),
       'incomeList': incomeList.map((e) => e.toJson()).toList(),
       'depositList': depositList.map((e) => e.toJson()).toList(),
@@ -49,7 +53,9 @@ extension ExpenseSerializationExtension on Expense {
   toJson() {
     return jsonEncode(<String, dynamic>{
       'id': getId().toString(),
+      'date': getDate().toIso8601String(),
       'description': getDescription(),
+      'depositId': getDepositId().toString(),
       'value': moneyToString(getValue()),
       'tags': getTags(),
     });

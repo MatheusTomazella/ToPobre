@@ -9,7 +9,9 @@ class TablesNotifier extends ChangeNotifier {
   final List<ExpensesTable> _tables = genTableList(1);
   ExpensesTable? _currentTable;
 
-  void update() => notifyListeners();
+  void update() {
+    notifyListeners();
+  }
 
   ExpensesTable findTable(ExpensesTable table) =>
       _tables.firstWhere((e) => e.equals(table));
@@ -36,6 +38,7 @@ class TablesNotifier extends ChangeNotifier {
   void copyTable(ExpensesTable table) {
     var newTable = ExpensesTable.from(table);
     newTable.setName(table.getName() + StringConsts.COPY_TRAILER);
+    newTable.setCreationDate(DateTime.now());
     _tables.add(newTable);
     update();
   }
