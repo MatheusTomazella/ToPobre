@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const ExpensesApp());
-}
+void main() => runApp(const ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
   const ExpensesApp({Key? key}) : super(key: key);
@@ -46,10 +44,13 @@ class ExpensesApp extends StatelessWidget {
               ),
         },
         home: Consumer<TablesNotifier>(
-          builder: (context, tableListNotifier, _) => TableListPage(
-            tables: tableListNotifier.getOrderedTables(),
-          ),
-        ),
+            builder: (context, tableListNotifier, _) => FutureBuilder(
+                  future: Provider.of<TablesNotifier>(context, listen: false)
+                      .init(),
+                  builder: ((context, snapshot) => TableListPage(
+                        tables: tableListNotifier.getOrderedTables(),
+                      )),
+                )),
       ),
     );
   }

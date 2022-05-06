@@ -1,4 +1,4 @@
-import 'package:expensesapp/utils/gen_table_list.dart';
+import 'package:expensesapp/services/table_database_service.dart';
 import 'package:flutter/widgets.dart';
 
 import '../constants/strings.dart';
@@ -6,11 +6,20 @@ import '../models/expense_tag.dart';
 import '../models/expenses_table.dart';
 
 class TablesNotifier extends ChangeNotifier {
-  final List<ExpensesTable> _tables = genTableList(1);
+  bool initialized = false;
+  final List<ExpensesTable> _tables = [];
   ExpensesTable? _currentTable;
+
+  Future<bool> init() async {
+    if (initialized) return true;
+    _tables.addAll(await TableDatabaseService.loadTableList());
+    initialized = true;
+    return true;
+  }
 
   void update() {
     notifyListeners();
+    TableDatabaseService.saveTableList(_tables);
   }
 
   ExpensesTable findTable(ExpensesTable table) =>
