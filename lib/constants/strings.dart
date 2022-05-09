@@ -51,6 +51,9 @@ class StringConsts {
   // Table Configurations
   static const String TABLE_CONFIG_TAG_TITLE = "Etiquetas";
 
+  // ---------------------------------------------------------------------------
+  // DIALOGS
+
   // Rename Dialog
   static const String RENAME_DIALOG_TITLE = "Renomear";
   static const String RENAME_DIALOG_PLACEHOLDER = "Novo nome";
@@ -147,23 +150,24 @@ class StringConsts {
       "A descrição não pode ser vazia.";
   static const String INVALID_INCOME_DIALOG_TEXT_INVALID_VALUE =
       "O valor não é válido.";
-  
+
   // New Deposit Dialog
   static const String NEW_DEPOSIT_DIALOG_TITLE = "Novo depósito";
   static const String NEW_DEPOSIT_DIALOG_NAME_LABEL = "Nome";
-  static const String NEW_DEPOSIT_DIALOG_NAME_PLACEHOLDER =
-      "Nome do depósito";
+  static const String NEW_DEPOSIT_DIALOG_NAME_PLACEHOLDER = "Nome do depósito";
   static const String NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_LABEL = "Anterior";
-  static const String NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_PLACEHOLDER = 
+  static const String NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_PLACEHOLDER =
       "Valor restante na tabela anterior";
   static const String NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_LABEL = "Adição";
-  static const String NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_PLACEHOLDER = "Valor adicionado";
+  static const String NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_PLACEHOLDER =
+      "Valor adicionado";
   static const String NEW_DEPOSIT_DIALOG_CONFIRM_BUTTON_TEXT = "Salvar";
   static const String NEW_DEPOSIT_DIALOG_CANCEL_BUTTON_TEXT = "Cancelar";
   // Edit Deposit Dialog
   static const String EDIT_DEPOSIT_DIALOG_TITLE = "Editar entrada";
   // Confirmation Dialog (new)
-  static const String NEW_DEPOSIT_CONFIRMATION_DIALOG_TITLE = "Salvar depósito?";
+  static const String NEW_DEPOSIT_CONFIRMATION_DIALOG_TITLE =
+      "Salvar depósito?";
   static const String NEW_DEPOSIT_CONFIRMATION_DIALOG_TEXT =
       "Tem certeza que deseja criar um novo depósito?\n";
   // Confirmation Dialog (edit)
@@ -201,5 +205,16 @@ class StringConsts {
   static const String INVALID_EXPENSE_DIALOG_TEXT_EMPTY_DESCRIPTION =
       "A descrição não pode ser vazia.";
   static const String INVALID_EXPENSE_DIALOG_TEXT_INVALID_VALUE =
-      "O valor não é válido.";  
+      "O valor não é válido.";
+
+  // ---------------------------------------------------------------------------
+  // CHARTS
+
+  // Default titles
+  static const PREVIOUS_CURRENT_COMPARISON_BAR_DEFAULT_TITLE =
+      "Comparação de valores anteriores e atuais";
+  static const TAG_PIE_DEFAULT_TITLE = "Comparação por tags";
+  static const TAG_BAR_DEFAULT_TITLE = "Comparação por tags";
+  static const SPENT_VS_TOTAL_PIE_DEFAULT_TITLE = "Gasto x Total";
+  static const SPENT_VS_INCOME_PIE_DEFAULT_TITLE = "Gasto x Entrada";
 }

@@ -1,14 +1,26 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:expensesapp/constants/database.dart';
 import 'package:expensesapp/pages/tableConfigPage/table_config_page.dart';
 import 'package:expensesapp/pages/tableListPage/table_list_page.dart';
 import 'package:expensesapp/pages/tablePage/table_page.dart';
 import 'package:expensesapp/providers/tables_notifier.dart';
 import 'package:expensesapp/providers/tables_provider.dart';
+import 'package:expensesapp/services/database_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expensesapp/constants/strings.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';   
 
-void main() => runApp(const ExpensesApp());
+const bool SERIALIZATION_ENABLED = true;
+
+void main() {
+  runApp(const ExpensesApp());
+
+  if (!SERIALIZATION_ENABLED) {
+    DatabaseService.save('', DatabaseConsts.TABLE_DATABASE_NAME);
+  }
+}
 
 class ExpensesApp extends StatelessWidget {
   const ExpensesApp({Key? key}) : super(key: key);

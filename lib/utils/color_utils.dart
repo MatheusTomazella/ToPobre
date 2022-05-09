@@ -9,7 +9,7 @@ Color colorFromRgbString(String rgbString) {
   int r = int.parse(rgbList[0]);
   int g = int.parse(rgbList[1]);
   int b = int.parse(rgbList[2]);
-  return Color.fromARGB(1, r, g, b);
+  return Color.fromARGB(255, r, g, b);
 }
 
 extension ColorExtension on String {

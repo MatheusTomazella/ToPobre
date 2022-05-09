@@ -14,7 +14,7 @@ class ExpenseTag {
   }
   ExpenseTag.fromRgbString({required String name, required String rgbString}) {
     setName(name);
-    setColor(colorFromRgbString(rgbString));
+    setColor(rgbString.toColor());
   }
 
   String getName() => _name;

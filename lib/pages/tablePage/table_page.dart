@@ -1,4 +1,5 @@
 import 'package:expensesapp/models/expenses_table.dart';
+import 'package:expensesapp/pages/tablePage/chartsTab/charts_tab.dart';
 import 'package:expensesapp/pages/tablePage/expensesTab/expenses_tab.dart';
 import 'package:expensesapp/pages/tablePage/mainTableTab/main_table_tab.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _TablePageState extends State<TablePage> with TickerProviderStateMixin {
         children: <Widget>[
           MainTableTab(table: widget.table),
           ExpensesTab(table: widget.table),
-          const Text("Tab 3"),
+          ChartsTab(table: widget.table),
         ],
       ),
     );
