@@ -25,7 +25,11 @@ class DonutAutoLabelChart extends StatelessWidget {
         data: data!,
         domainFn: (ChartDataModel item, _) => item.domain,
         measureFn: (ChartDataModel item, _) => item.measure,
-        labelAccessorFn: (ChartDataModel item, _) => item.label,
+        labelAccessorFn: (ChartDataModel item, _) => item.label ?? '',
+        colorFn: data![0].color != null
+            ? (ChartDataModel item, _) =>
+                charts.ColorUtil.fromDartColor(item.color!)
+            : null,
       )
     ];
   }

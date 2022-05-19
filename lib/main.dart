@@ -1,5 +1,4 @@
 // ignore_for_file: constant_identifier_names
-
 import 'package:expensesapp/constants/database.dart';
 import 'package:expensesapp/pages/tableConfigPage/table_config_page.dart';
 import 'package:expensesapp/pages/tableListPage/table_list_page.dart';

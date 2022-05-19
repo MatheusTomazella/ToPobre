@@ -1,4 +1,4 @@
-import 'package:expensesapp/components/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
 import 'package:expensesapp/components/expense_tag_chip.dart';
 import 'package:expensesapp/constants/color.dart';
 import 'package:expensesapp/constants/strings.dart';

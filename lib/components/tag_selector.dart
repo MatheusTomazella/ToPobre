@@ -1,7 +1,7 @@
 import 'package:expensesapp/components/expense_tag_chip.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/expenses_table.dart';
+import '../models/expenses_table.dart';
 
 class TagSelector extends StatelessWidget {
   final ExpensesTable table;

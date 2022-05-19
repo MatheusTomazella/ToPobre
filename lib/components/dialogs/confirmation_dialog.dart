@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/strings.dart';
+import '../../constants/strings.dart';
 
 Future<bool?> showConfirmationDialog(
     {required BuildContext context,

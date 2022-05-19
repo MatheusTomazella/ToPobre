@@ -9,8 +9,8 @@ String getDefaultChartTitle(CHART_TYPES type) {
       return StringConsts.TAG_PIE_DEFAULT_TITLE;
     case CHART_TYPES.TAG_BAR:
       return StringConsts.TAG_BAR_DEFAULT_TITLE;
-    case CHART_TYPES.SPENT_VS_TOTAL_PIE:
-      return StringConsts.SPENT_VS_TOTAL_PIE_DEFAULT_TITLE;
+    case CHART_TYPES.SPENT_VS_DEPOSITED_PIE:
+      return StringConsts.SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE;
     case CHART_TYPES.SPENT_VS_INCOME_PIE:
       return StringConsts.SPENT_VS_INCOME_PIE_DEFAULT_TITLE;
   }

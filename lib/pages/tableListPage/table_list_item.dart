@@ -1,5 +1,5 @@
-import 'package:expensesapp/components/confirmation_dialog.dart';
-import 'package:expensesapp/components/information_dialog.dart';
+import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/information_dialog.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/pages/tableListPage/rename_dialog.dart';

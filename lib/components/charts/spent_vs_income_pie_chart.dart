@@ -21,20 +21,21 @@ class SpentVsIncomePieChart extends StatelessWidget {
         .amount
         .toDecimal()
         .toDouble();
+    bool spentMoreThanHave = spent >= total;
     var percentageOfSpent = 100.0;
     if (total != 0) percentageOfSpent = spent / total * 100;
-    var percentageOfRemaining = 100 - percentageOfSpent;
-    var remaining = total - spent;
+    double percentageOfRemaining = spentMoreThanHave ? 0 : 100 - percentageOfSpent;
+    double remaining = total - spent;
     return [
       ChartDataModel(
         0,
         percentageOfSpent,
-        buildNameAmountPercentageLabel('Spent', spent, percentageOfSpent),
+        label: buildNameAmountPercentageLabel('Spent', spent, percentageOfSpent),
       ),
       ChartDataModel(
         1,
         percentageOfRemaining,
-        buildNameAmountPercentageLabel(
+        label: buildNameAmountPercentageLabel(
             'Remaining', remaining, percentageOfRemaining),
       )
     ];

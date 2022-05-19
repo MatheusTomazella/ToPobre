@@ -1,18 +1,18 @@
-import 'package:expensesapp/components/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
 import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/utils/format_date.dart';
 import 'package:expensesapp/utils/get_first_deposit_id.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
-import '../../../components/information_dialog.dart';
+import '../../../components/dialogs/information_dialog.dart';
 import '../../../constants/currency.dart';
 import '../../../constants/strings.dart';
 import '../../../models/expenses_table.dart';
 import '../../../services/manage_deposit_service.dart';
 import '../../../services/manage_expense_service.dart';
 import '../../../utils/clean_money_string.dart';
-import './tag_selector.dart';
+import '../../../components/tag_selector.dart';
 
 Future<void> showExpenseDialog({
   required BuildContext context,

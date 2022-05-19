@@ -1,9 +1,10 @@
 import 'package:expensesapp/constants/strings.dart';
+import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/models/deposit.dart';
 import 'package:expensesapp/models/expense_tag.dart';
 import 'package:expensesapp/models/income.dart';
-import 'package:flutter/material.dart';
 
+import '../constants/chart_types.dart';
 import '../utils/get_next_available_id.dart';
 import 'expense.dart';
 
@@ -15,10 +16,13 @@ class ExpensesTable {
   List<Income> incomeList = [];
   List<Deposit> depositList = [];
   List<Expense> expenseList = [];
-  List<ExpenseTag> tagList = [
-    ExpenseTag.fromColor(name: "Mensal", color: Colors.deepOrange),
-    ExpenseTag.fromColor(name: "Não precisava", color: Colors.cyan),
-    ExpenseTag.fromColor(name: "Necessário", color: Colors.purple),
+  List<ExpenseTag> tagList = [];
+  List<ChartModel> chartList = [
+    ChartModel(title: '', type: CHART_TYPES.SPENT_VS_DEPOSITED_PIE),
+    ChartModel(title: '', type: CHART_TYPES.SPENT_VS_INCOME_PIE),
+    ChartModel(title: '', type: CHART_TYPES.PREVIOUS_CURRENT_COMPARISON_BAR),
+    ChartModel(title: '', type: CHART_TYPES.TAG_BAR),
+    ChartModel(title: '', type: CHART_TYPES.TAG_PIE, tags: ['teste 1', 'teste 2']),
   ];
 
   ExpensesTable(String name) {

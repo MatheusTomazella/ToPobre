@@ -2,7 +2,7 @@ import 'package:expensesapp/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-import '../../components/information_dialog.dart';
+import '../../components/dialogs/information_dialog.dart';
 import '../../models/expense_tag.dart';
 
 Future<void> showTagDialog({

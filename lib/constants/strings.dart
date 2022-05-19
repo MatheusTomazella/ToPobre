@@ -212,9 +212,9 @@ class StringConsts {
 
   // Default titles
   static const PREVIOUS_CURRENT_COMPARISON_BAR_DEFAULT_TITLE =
-      "Comparação de valores anteriores e atuais";
-  static const TAG_PIE_DEFAULT_TITLE = "Comparação por tags";
-  static const TAG_BAR_DEFAULT_TITLE = "Comparação por tags";
-  static const SPENT_VS_TOTAL_PIE_DEFAULT_TITLE = "Gasto x Total";
+      "Valores Anteriores x Atuais";
+  static const TAG_PIE_DEFAULT_TITLE = "Comparação por Tags";
+  static const TAG_BAR_DEFAULT_TITLE = "Comparação por Tags";
+  static const SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE = "Gasto x Depositado";
   static const SPENT_VS_INCOME_PIE_DEFAULT_TITLE = "Gasto x Entrada";
 }

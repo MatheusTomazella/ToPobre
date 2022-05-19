@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/strings.dart';
+import '../../constants/strings.dart';
 
 Future<void> showInformationDialog({
   required BuildContext context,

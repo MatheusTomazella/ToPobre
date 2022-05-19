@@ -23,11 +23,26 @@ class ChartModel {
     this.tags,
   });
 
+  ChartModel.from(ChartModel other)
+      : this.filled(
+          uuid: other.uuid,
+          type: other.type,
+          title: other.title,
+          tags: other.tags,
+        );
+
   ChartModel.defaultChart()
       : this.filled(
           uuid: const Uuid().v4(),
-          type: CHART_TYPES.SPENT_VS_TOTAL_PIE,
+          type: CHART_TYPES.SPENT_VS_DEPOSITED_PIE,
           title: '',
           tags: null,
         );
+
+  Map<String, dynamic> toMap() => {
+        'uuid': uuid,
+        'type': type,
+        'title': title,
+        'tags': tags,
+      };
 }

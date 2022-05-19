@@ -1,6 +1,4 @@
 import 'package:expensesapp/components/charts/expenses_chart.dart';
-import 'package:expensesapp/constants/chart_types.dart';
-import 'package:expensesapp/models/chart_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expensesapp/models/expenses_table.dart';
@@ -18,13 +16,9 @@ class ChartsTab extends StatelessWidget {
       body: SizedBox.expand(
         child: ListView(
           scrollDirection: Axis.vertical,
-          children: <Widget>[
-            ExpensesChart(
-              table: table,
-              chartModel:
-                  ChartModel(title: '', type: CHART_TYPES.SPENT_VS_TOTAL_PIE),
-            ),
-          ],
+          children: table.chartList
+              .map((model) => ExpensesChart(table: table, chartModel: model))
+              .toList(),
         ),
       ),
     ));

@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '../constants/strings.dart';
 import '../models/deposit.dart';
 import '../models/expense.dart';
+import '../models/expense_tag.dart';
 import '../models/expenses_table.dart';
 import '../models/income.dart';
 
@@ -65,7 +68,10 @@ List<ExpensesTable> genTableList(int n) {
       ..addExpenseUsingAvailableId(
           Expense.withTags(0, ["Mensal", "Não precisava"]))
       ..addExpenseUsingAvailableId(Expense.withTags(0, ["Não precisava"]))
-      ..addExpenseUsingAvailableId(Expense.withTags(0, ["Não precisava"]));
+      ..addExpenseUsingAvailableId(Expense.withTags(0, ["Não precisava"]))
+      ..addTag(ExpenseTag.fromColor(name: "Mensal", color: Colors.deepOrange))
+      ..addTag(ExpenseTag.fromColor(name: "Não precisava", color: Colors.cyan))
+      ..addTag(ExpenseTag.fromColor(name: "Necessário", color: Colors.purple));
     return table;
   });
 }
