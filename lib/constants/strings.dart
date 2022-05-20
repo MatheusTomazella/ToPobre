@@ -207,14 +207,58 @@ class StringConsts {
   static const String INVALID_EXPENSE_DIALOG_TEXT_INVALID_VALUE =
       "O valor não é válido.";
 
+  // Chart Rename Dialog
+  static const String CHART_RENAME_DIALOG_TITLE = "Renomear Gráfico";
+  static const String CHART_RENAME_DIALOG_INPUT_PLACEHOLDER = "Título";
+  static const String CHART_RENAME_DIALOG_CANCEL = "Cancelar";
+  static const String CHART_RENAME_DIALOG_SAVE = "Salvar";
+  // Error Dialog
+  static const String CHART_RENAME_DIALOG_ERROR_TITLE = "Erro ao renomear";
+  static const String CHART_RENAME_DIALOG_ERROR_EMPTY_TITLE =
+      "O título do gráfico não pode ser vazio";
+
+  // Delete Chart Dialog
+  static const String CHART_DELETE_DIALOG_TITLE = "Deletar Gráfico?";
+  static const String CHART_DELETE_DIALOG_TEXT =
+      "Tem certeza que deve excluir o gráfico? Essa ação não pode ser desfeita.";
+  static const String CHART_DELETE_DIALOG_CANCEL = "Cancelar";
+  static const String CHART_DELETE_DIALOG_CONFIRM = "Excluir";
+
+  // Tag Chart Dialog
+  static const String TAG_CHART_CONFIG_DIALOG_TITLE = "Gráfico de Etiquetas";
+  static const String TAG_CHART_CONFIG_DIALOG_CANCEL = "Cancelar";
+  static const String TAG_CHART_CONFIG_DIALOG_SAVE = "Salvar";
+  // Confirmation Dialog
+  static const String TAG_CHART_CONFIG_DIALOG_CONFIRMATION_TITLE =
+      "Salvar Configurações";
+  static const String TAG_CHART_CONFIG_DIALOG_CONFIRMATION_TEXT =
+      "Deseja salvar as configurações do gráfico?";
+  // Error Dialog
+  static const String TAG_CHART_CONFIG_DIALOG_ERROR_TITLE = "Erro ao salvar";
+  static const String TAG_CHART_CONFIG_DIALOG_ERROR_MINIMUM_TAGS =
+      "Selecione ao menos duas etiquetas";
+
   // ---------------------------------------------------------------------------
   // CHARTS
+
+  static const FAILED_TO_LOAD_CHART = 'Falha ao mostrar gráfico';
 
   // Default titles
   static const PREVIOUS_CURRENT_COMPARISON_BAR_DEFAULT_TITLE =
       "Valores Anteriores x Atuais";
-  static const TAG_PIE_DEFAULT_TITLE = "Comparação por Tags";
-  static const TAG_BAR_DEFAULT_TITLE = "Comparação por Tags";
+  static const TAG_PIE_DEFAULT_TITLE = "Comparação por Etiquetas";
+  static const TAG_BAR_DEFAULT_TITLE = "Comparação por Etiquetas";
   static const SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE = "Gasto x Depositado";
   static const SPENT_VS_INCOME_PIE_DEFAULT_TITLE = "Gasto x Entrada";
+
+  // Popup Menu
+  static const CHART_POPUP_MENU_RENAME = "Renomear";
+  static const CHART_POPUP_MENU_DELETE = "Excluir";
+  static const CHART_POPUP_MENU_UP = "Mover Acima";
+  static const CHART_POPUP_MENU_DOWN = "Mover Abaixo";
+  static const CHART_POPUP_MENU_CONFIG = "Configurar";
+
+  // Labels
+  static const CHART_LABEL_REMAINING = "Restante";
+  static const CHART_LABEL_SPENT = "Gasto";
 }

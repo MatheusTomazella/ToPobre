@@ -7,6 +7,8 @@ import 'package:expensesapp/services/calculate_total_income_service.dart';
 import 'package:expensesapp/utils/build_labels.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/strings.dart';
+
 class SpentVsIncomePieChart extends StatelessWidget {
   final ExpensesTable table;
   final ChartModel chartModel;
@@ -24,19 +26,23 @@ class SpentVsIncomePieChart extends StatelessWidget {
     bool spentMoreThanHave = spent >= total;
     var percentageOfSpent = 100.0;
     if (total != 0) percentageOfSpent = spent / total * 100;
-    double percentageOfRemaining = spentMoreThanHave ? 0 : 100 - percentageOfSpent;
+    double percentageOfRemaining =
+        spentMoreThanHave ? 0 : 100 - percentageOfSpent;
     double remaining = total - spent;
     return [
       ChartDataModel(
         0,
         percentageOfSpent,
-        label: buildNameAmountPercentageLabel('Spent', spent, percentageOfSpent),
+        label: buildNameAmountPercentageLabel(
+            StringConsts.CHART_LABEL_SPENT, spent, percentageOfSpent),
       ),
       ChartDataModel(
         1,
         percentageOfRemaining,
         label: buildNameAmountPercentageLabel(
-            'Remaining', remaining, percentageOfRemaining),
+            StringConsts.CHART_LABEL_REMAINING,
+            remaining,
+            percentageOfRemaining),
       )
     ];
   }

@@ -2,6 +2,7 @@ import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/services/manage_table_chart_list_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/strings.dart';
 import '../../models/expenses_table.dart';
 import 'information_dialog.dart';
 
@@ -17,7 +18,7 @@ Future<void> showChartRenameDialog({
     void showError(String text) {
       showInformationDialog(
           context: context,
-          title: 'chart rename error title change later',
+          title: StringConsts.CHART_RENAME_DIALOG_ERROR_TITLE,
           text: text,
           primaryColor: Colors.redAccent,
           onConfirm: () {
@@ -27,7 +28,7 @@ Future<void> showChartRenameDialog({
     }
 
     if (newModel.title.isEmpty) {
-      showError('title empty change later');
+      showError(StringConsts.CHART_RENAME_DIALOG_ERROR_EMPTY_TITLE);
       return false;
     }
     return true;
@@ -35,16 +36,16 @@ Future<void> showChartRenameDialog({
 
   return showDialog<void>(
     context: context,
-    barrierDismissible: false,
+    barrierDismissible: true,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text("title change later"),
+        title: const Text(StringConsts.CHART_RENAME_DIALOG_TITLE),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
               TextField(
                 decoration: const InputDecoration(
-                  hintText: "chart title change later",
+                  hintText: StringConsts.CHART_RENAME_DIALOG_INPUT_PLACEHOLDER,
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.orange)),
                 ),
@@ -55,7 +56,7 @@ Future<void> showChartRenameDialog({
         ),
         actions: <Widget>[
           OutlinedButton(
-            child: const Text("change later"),
+            child: const Text(StringConsts.CHART_RENAME_DIALOG_CANCEL),
             style: OutlinedButton.styleFrom(
               primary: Colors.orange,
               side: const BorderSide(color: Colors.orange),
@@ -63,9 +64,10 @@ Future<void> showChartRenameDialog({
             onPressed: () => Navigator.of(context).pop(),
           ),
           ElevatedButton(
-            child: const Text("change later"),
+            child: const Text(StringConsts.CHART_RENAME_DIALOG_SAVE),
             style: ElevatedButton.styleFrom(
               primary: Colors.orange,
+              side: const BorderSide(color: Colors.orange),
             ),
             onPressed: () {
               if (!validate()) return;

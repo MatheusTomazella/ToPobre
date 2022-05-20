@@ -4,6 +4,7 @@ import 'package:expensesapp/components/charts/spent_vs_total_pie_chart.dart';
 import 'package:expensesapp/components/charts/tag_pie_chart.dart';
 import 'package:expensesapp/components/dialogs/chart_rename_dialog.dart';
 import 'package:expensesapp/constants/chart_types.dart';
+import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/services/manage_table_chart_list_service.dart';
@@ -50,7 +51,7 @@ class ExpensesChart extends StatelessWidget {
           children: const [
             Icon(Icons.edit, color: Colors.orange),
             SizedBox(width: 10),
-            Text("rename"),
+            Text(StringConsts.CHART_POPUP_MENU_RENAME),
           ],
         ),
         value: 'rename',
@@ -60,7 +61,7 @@ class ExpensesChart extends StatelessWidget {
           children: const [
             Icon(Icons.delete, color: Colors.redAccent),
             SizedBox(width: 10),
-            Text("delete"),
+            Text(StringConsts.CHART_POPUP_MENU_DELETE),
           ],
         ),
         value: 'delete',
@@ -70,7 +71,7 @@ class ExpensesChart extends StatelessWidget {
           children: const [
             Icon(Icons.arrow_upward, color: Colors.black87),
             SizedBox(width: 10),
-            Text("move up"),
+            Text(StringConsts.CHART_POPUP_MENU_UP),
           ],
         ),
         value: 'up',
@@ -80,7 +81,7 @@ class ExpensesChart extends StatelessWidget {
           children: const [
             Icon(Icons.arrow_downward, color: Colors.black87),
             SizedBox(width: 10),
-            Text("move down"),
+            Text(StringConsts.CHART_POPUP_MENU_DOWN),
           ],
         ),
         value: 'down',
@@ -95,7 +96,7 @@ class ExpensesChart extends StatelessWidget {
               children: const [
                 Icon(Icons.settings, color: Colors.blue),
                 SizedBox(width: 10),
-                Text("edit"),
+                Text(StringConsts.CHART_POPUP_MENU_CONFIG),
               ],
             ),
             value: 'edit',
@@ -137,8 +138,10 @@ class ExpensesChart extends StatelessWidget {
                   if (value == 'delete') {
                     showConfirmationDialog(
                         context: context,
-                        title: "delte chart?",
-                        text: "remember to chage this later",
+                        title: StringConsts.CHART_DELETE_DIALOG_TITLE,
+                        text: StringConsts.CHART_DELETE_DIALOG_TEXT,
+                        cancelText: StringConsts.CHART_DELETE_DIALOG_CANCEL,
+                        confirmText: StringConsts.CHART_DELETE_DIALOG_CONFIRM,
                         onConfirm: () {
                           ManageTableChartListService
                               .removeChartFromTableInProvider(
@@ -164,7 +167,7 @@ class ExpensesChart extends StatelessWidget {
         ),
         SizedBox(
           height: 300,
-          child: chartWidget ?? const Text("Failed to load chart change later"),
+          child: chartWidget ?? const Text(StringConsts.FAILED_TO_LOAD_CHART),
         ),
       ],
     );

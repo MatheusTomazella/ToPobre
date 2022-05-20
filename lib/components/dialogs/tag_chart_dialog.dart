@@ -22,7 +22,7 @@ Future<void> showTagChartDialog({
         void showError(String text) {
           showInformationDialog(
               context: context,
-              title: StringConsts.INVALID_EXPENSE_DIALOG_TITLE,
+              title: StringConsts.TAG_CHART_CONFIG_DIALOG_ERROR_TITLE,
               text: text,
               primaryColor: Colors.redAccent,
               onConfirm: () {
@@ -32,7 +32,7 @@ Future<void> showTagChartDialog({
         }
 
         if (newModel.tags!.length < 2) {
-          showError('minimum 2 tags change later');
+          showError(StringConsts.TAG_CHART_CONFIG_DIALOG_ERROR_MINIMUM_TAGS);
           return false;
         }
         return true;
@@ -41,7 +41,7 @@ Future<void> showTagChartDialog({
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: const Text('tag config dialog change later'),
+            title: const Text(StringConsts.TAG_CHART_CONFIG_DIALOG_TITLE),
             scrollable: true,
             content: SingleChildScrollView(
                 child: ListBody(
@@ -59,14 +59,20 @@ Future<void> showTagChartDialog({
             actions: <Widget>[
               OutlinedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('cancel change later'),
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.blue,
+                  side: const BorderSide(color: Colors.blue),
+                ),
+                child: const Text(StringConsts.TAG_CHART_CONFIG_DIALOG_CANCEL),
               ),
               ElevatedButton(
                 onPressed: () {
                   showConfirmationDialog(
                     context: context,
-                    title: 'confirm change later',
-                    text: 'rly wnna do dis? change later',
+                    title:
+                        StringConsts.TAG_CHART_CONFIG_DIALOG_CONFIRMATION_TITLE,
+                    text:
+                        StringConsts.TAG_CHART_CONFIG_DIALOG_CONFIRMATION_TEXT,
                     onConfirm: () {
                       if (!validate()) return;
                       ManageTableChartListService.replaceChartInProvider(
@@ -76,7 +82,8 @@ Future<void> showTagChartDialog({
                     },
                   );
                 },
-                child: const Text('save change later'),
+                style: ElevatedButton.styleFrom(primary: Colors.blue),
+                child: const Text(StringConsts.TAG_CHART_CONFIG_DIALOG_SAVE),
               ),
             ],
           );
