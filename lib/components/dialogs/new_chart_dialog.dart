@@ -1,4 +1,3 @@
-import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
 import 'package:expensesapp/constants/chart_types.dart';
 import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/services/manage_table_chart_list_service.dart';

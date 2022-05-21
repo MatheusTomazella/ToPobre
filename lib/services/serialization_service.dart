@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/models/expense_tag.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/utils/color_utils.dart';
@@ -24,6 +25,7 @@ extension TableSerializationExtension on ExpensesTable {
       'depositList': depositList.map((e) => e.toJson()).toList(),
       'expenseList': expenseList.map((e) => e.toJson()).toList(),
       'tagList': tagList.map((e) => e.toJson()).toList(),
+      'chartList': chartList.map((e) => e.toJson()).toList(),
     });
   }
 }
@@ -67,6 +69,17 @@ extension TagSerializationExtension on ExpenseTag {
     return jsonEncode(<String, String>{
       'name': getName(),
       'color': getColor().toRgbString(),
+    });
+  }
+}
+
+extension ChartModelSerializationExtension on ChartModel {
+  toJson() {
+    return jsonEncode(<String, dynamic>{
+      'uuid': uuid,
+      'title': title,
+      'type': type.toString(),
+      'tags': tags,
     });
   }
 }

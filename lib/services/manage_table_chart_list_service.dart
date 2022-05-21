@@ -1,5 +1,4 @@
 import 'package:expensesapp/models/chart_model.dart';
-import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/providers/tables_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

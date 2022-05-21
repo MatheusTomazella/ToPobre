@@ -4,7 +4,6 @@ import 'package:expensesapp/models/deposit.dart';
 import 'package:expensesapp/models/expense_tag.dart';
 import 'package:expensesapp/models/income.dart';
 
-import '../constants/chart_types.dart';
 import '../utils/get_next_available_id.dart';
 import 'expense.dart';
 
@@ -17,14 +16,7 @@ class ExpensesTable {
   List<Deposit> depositList = [];
   List<Expense> expenseList = [];
   List<ExpenseTag> tagList = [];
-  List<ChartModel> chartList = [
-    ChartModel(title: '', type: CHART_TYPES.SPENT_VS_DEPOSITED_PIE),
-    ChartModel(title: '', type: CHART_TYPES.SPENT_VS_INCOME_PIE),
-    ChartModel(title: '', type: CHART_TYPES.PREVIOUS_CURRENT_COMPARISON_BAR),
-    ChartModel(title: '', type: CHART_TYPES.TAG_BAR),
-    ChartModel(
-        title: '', type: CHART_TYPES.TAG_PIE, tags: ['teste 1', 'teste 2']),
-  ];
+  List<ChartModel> chartList = [];
 
   ExpensesTable(String name) {
     setName(name);
@@ -48,6 +40,7 @@ class ExpensesTable {
     List<Deposit> depositList,
     List<Expense> expenseList,
     List<ExpenseTag> tagList,
+    List<ChartModel> chartList,
   ) {
     setName(name);
     setCreationDate(creationDate);
@@ -56,6 +49,7 @@ class ExpensesTable {
     this.depositList = List.from(depositList);
     this.expenseList = List.from(expenseList);
     this.tagList = List.from(tagList);
+    this.chartList = List.from(chartList);
   }
 
   ExpensesTable.from(ExpensesTable table)
@@ -67,6 +61,7 @@ class ExpensesTable {
           table.depositList,
           table.expenseList,
           table.tagList,
+          table.chartList,
         );
 
   void addIncome(Income income) => incomeList.add(income);

@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/models/deposit.dart';
 import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/models/expense_tag.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/models/income.dart';
+import 'package:expensesapp/utils/chart_type_from_string.dart';
 import 'package:expensesapp/utils/double_string_to_money.dart';
 
 class DeserializationService {
@@ -24,6 +26,7 @@ class DeserializationService {
       deserializeDepositList(map["depositList"]),
       deserializeExpenseList(map["expenseList"]),
       deserializeTagList(map["tagList"]),
+      deserializeChartList(map["chartList"]),
     );
   }
 
@@ -79,5 +82,19 @@ class DeserializationService {
   static ExpenseTag deserializeTag(String serializedString) {
     var map = jsonDecode(serializedString);
     return ExpenseTag.fromRgbString(name: map["name"], rgbString: map["color"]);
+  }
+
+  static List<ChartModel> deserializeChartList(List<dynamic> list) {
+    return list.map((chartString) => deserializeChart(chartString)).toList();
+  }
+
+  static ChartModel deserializeChart(String serializedString) {
+    var map = jsonDecode(serializedString);
+    return ChartModel.filled(
+      uuid: map['uuid'],
+      title: map['title'],
+      type: chartTypeFromString(map['type']),
+      tags: List<String>.from(map['tags']),
+    );
   }
 }
