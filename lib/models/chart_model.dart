@@ -5,15 +5,16 @@ import 'package:uuid/uuid.dart';
 class ChartModel {
   final String uuid;
   CHART_TYPES type;
-  String title;
+  late String title;
   List<String>? tags;
 
   ChartModel({
     required this.type,
-    required this.title,
+    String? title,
     this.tags,
   }) : uuid = const Uuid().v4() {
-    if (title.isEmpty) title = getDefaultChartTitle(type);
+    this.title =
+        (title == null || title.isEmpty) ? getDefaultChartTitle(type) : title;
   }
 
   ChartModel.filled({

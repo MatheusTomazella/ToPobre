@@ -22,7 +22,8 @@ class ExpensesTable {
     ChartModel(title: '', type: CHART_TYPES.SPENT_VS_INCOME_PIE),
     ChartModel(title: '', type: CHART_TYPES.PREVIOUS_CURRENT_COMPARISON_BAR),
     ChartModel(title: '', type: CHART_TYPES.TAG_BAR),
-    ChartModel(title: '', type: CHART_TYPES.TAG_PIE, tags: ['teste 1', 'teste 2']),
+    ChartModel(
+        title: '', type: CHART_TYPES.TAG_PIE, tags: ['teste 1', 'teste 2']),
   ];
 
   ExpensesTable(String name) {
@@ -118,6 +119,9 @@ class ExpensesTable {
     tagList.remove(tag);
     for (var e in expenseList) {
       e.removeTag(tag.getName());
+    }
+    for (var model in chartList) {
+      model.tags?.removeWhere((element) => element == tag.getName());
     }
   }
 

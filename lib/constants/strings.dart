@@ -238,6 +238,15 @@ class StringConsts {
   static const String TAG_CHART_CONFIG_DIALOG_ERROR_MINIMUM_TAGS =
       "Selecione ao menos duas etiquetas";
 
+  // New Chart Dialog
+  static const String NEW_CHART_DIALOG_TITLE = "Adicionar Gráfico";
+  static const String NEW_CHART_DIALOG_CANCEL = "Cancelar";
+  static const String NEW_CHART_DIALOG_SAVE = "Adicionar";
+  // Error Dialog
+  static const String NEW_CHART_DIALOG_ERROR_TITLE = "Erro ao adicionar";
+  static const String NEW_CHART_DIALOG_ERROR_MINIMUM_TAGS =
+      "Adicione ao menos duas etiquetas à sua tabela para usar esse gráfico";
+
   // ---------------------------------------------------------------------------
   // CHARTS
 
@@ -251,12 +260,18 @@ class StringConsts {
   static const SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE = "Gasto x Depositado";
   static const SPENT_VS_INCOME_PIE_DEFAULT_TITLE = "Gasto x Entrada";
 
+  static const String BAR_CHART_TYPE = "barra";
+  static const String PIE_CHART_TYPE = "pizza";
+
   // Popup Menu
   static const CHART_POPUP_MENU_RENAME = "Renomear";
   static const CHART_POPUP_MENU_DELETE = "Excluir";
   static const CHART_POPUP_MENU_UP = "Mover Acima";
   static const CHART_POPUP_MENU_DOWN = "Mover Abaixo";
   static const CHART_POPUP_MENU_CONFIG = "Configurar";
+
+  // Button
+  static const String ADD_CHART_BUTTON = "+ Adicionar Gráfico";
 
   // Labels
   static const CHART_LABEL_REMAINING = "Restante";

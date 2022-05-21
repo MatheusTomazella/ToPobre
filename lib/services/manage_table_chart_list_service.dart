@@ -1,4 +1,5 @@
 import 'package:expensesapp/models/chart_model.dart';
+import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/providers/tables_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,6 +67,20 @@ class ManageTableChartListService {
       ChartModel oldModel, ChartModel newModel) {
     var provider = Provider.of<TablesNotifier>(context, listen: false);
     replaceChart(provider.findTable(table), oldModel, newModel);
+    provider.update();
+  }
+
+  static void addChart(ExpensesTable table, ChartModel model, {int? position}) {
+    position != null
+        ? table.chartList.insert(position, model)
+        : table.chartList.add(model);
+  }
+
+  static void addChartInProvider(
+      BuildContext context, ExpensesTable table, ChartModel model,
+      {int? position}) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    addChart(provider.findTable(table), model, position: position);
     provider.update();
   }
 }
