@@ -6,9 +6,12 @@ import '../models/expenses_table.dart';
 import '../models/income.dart';
 
 class ManageIncomeService {
-  static Income getIncomeByIdFromProvider(BuildContext context, ExpensesTable table, int id) {
-    var provider = Provider.of<TablesNotifier>(context, listen: false );
-    return provider.findTable(table).incomeList
+  static Income getIncomeByIdFromProvider(
+      BuildContext context, ExpensesTable table, int id) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    return provider
+        .findTable(table)
+        .incomeList
         .firstWhere((e) => e.getId() == id);
   }
 
@@ -28,11 +31,24 @@ class ManageIncomeService {
     provider.update();
   }
 
-  static void updateIncome ( BuildContext context, ExpensesTable table, Income oldIncome, Income newIncome ) {
+  static void updateIncome(BuildContext context, ExpensesTable table,
+      Income oldIncome, Income newIncome) {
     var provider = Provider.of<TablesNotifier>(context, listen: false);
-    provider.findTable(table)
-        .incomeList.firstWhere((e) => e.getId() == oldIncome.getId())
+    provider
+        .findTable(table)
+        .incomeList
+        .firstWhere((e) => e.getId() == oldIncome.getId())
         .update(newIncome);
+    provider.update();
+  }
+
+  static void deleteIncome(
+      BuildContext context, ExpensesTable table, Income income) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    provider
+        .findTable(table)
+        .incomeList
+        .removeWhere((element) => element.getId() == income.getId());
     provider.update();
   }
 }

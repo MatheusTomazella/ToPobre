@@ -1,4 +1,4 @@
-import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/default_dialog_buttons.dart';
 import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/utils/format_date.dart';
 import 'package:expensesapp/utils/get_first_deposit_id.dart';
@@ -147,41 +147,30 @@ Future<void> showExpenseDialog({
                     }),
               ],
             )),
-            actions: <Widget>[
-              OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                style: OutlinedButton.styleFrom(
-                    primary: Colors.red,
-                    side: const BorderSide(color: Colors.red)),
-                child: const Text(
-                    StringConsts.NEW_EXPENSE_DIALOG_CANCEL_BUTTON_TEXT),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  showConfirmationDialog(
-                    context: context,
-                    title: StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TITLE,
-                    text: oldExpense == null
-                        ? StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TEXT
-                        : StringConsts.EDIT_EXPENSE_CONFIMATION_DIALOG_TEXT,
-                    onConfirm: () {
-                      if (!validate()) return;
-                      if (oldExpense == null) {
-                        ManageExpenseService.addExpenseToTable(
-                            context, table, genNewExpense());
-                      } else {
-                        ManageExpenseService.updateExpense(
-                            context, table, oldExpense, genNewExpense());
-                      }
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-                child: const Text(
-                    StringConsts.NEW_EXPENSE_DIALOG_CONFIRM_BUTTON_TEXT),
-              ),
-            ],
+            actions: generateDialogButtons(
+              context: context,
+              confirmText: StringConsts.NEW_EXPENSE_DIALOG_CONFIRM_BUTTON_TEXT,
+              confirmationDialogTitle:
+                  StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TITLE,
+              confirmationDialogText: oldExpense == null
+                  ? StringConsts.NEW_EXPENSE_CONFIRMATION_DIALOG_TEXT
+                  : StringConsts.EDIT_EXPENSE_CONFIMATION_DIALOG_TEXT,
+              confirmFunction: () {
+                if (!validate()) return;
+                if (oldExpense == null) {
+                  ManageExpenseService.addExpenseToTable(
+                      context, table, genNewExpense());
+                } else {
+                  ManageExpenseService.updateExpense(
+                      context, table, oldExpense, genNewExpense());
+                }
+              },
+              cancelText: StringConsts.NEW_EXPENSE_DIALOG_CANCEL_BUTTON_TEXT,
+              deleteFunction: oldExpense != null
+                  ? () => ManageExpenseService.deleteExpense(
+                      context, table, oldExpense)
+                  : null,
+            ),
           );
         },
       );

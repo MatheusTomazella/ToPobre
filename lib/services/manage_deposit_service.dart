@@ -6,9 +6,12 @@ import 'package:provider/provider.dart';
 import '../models/expenses_table.dart';
 
 class ManageDepositService {
-  static Deposit getDepositByIdFromProvider(BuildContext context, ExpensesTable table, int id) {
-    var provider = Provider.of<TablesNotifier>(context, listen: false );
-    return provider.findTable(table).depositList
+  static Deposit getDepositByIdFromProvider(
+      BuildContext context, ExpensesTable table, int id) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    return provider
+        .findTable(table)
+        .depositList
         .firstWhere((e) => e.getId() == id);
   }
 
@@ -28,23 +31,35 @@ class ManageDepositService {
     provider.update();
   }
 
-  static void updateDeposit ( BuildContext context, ExpensesTable table, Deposit oldDeposit, Deposit newDeposit ) {
+  static void updateDeposit(BuildContext context, ExpensesTable table,
+      Deposit oldDeposit, Deposit newDeposit) {
     var provider = Provider.of<TablesNotifier>(context, listen: false);
-    provider.findTable(table)
-        .depositList.firstWhere((e) => e.getId() == oldDeposit.getId())
+    provider
+        .findTable(table)
+        .depositList
+        .firstWhere((e) => e.getId() == oldDeposit.getId())
         .update(newDeposit);
     provider.update();
   }
 
-  static Map<int, String> getDepositIdsAndNames(BuildContext context, ExpensesTable table) {
+  static Map<int, String> getDepositIdsAndNames(
+      BuildContext context, ExpensesTable table) {
     return Provider.of<TablesNotifier>(context, listen: false)
         .findTable(table)
         .depositList
-        .fold(
-          <int, String>{},
-          (Map<int, String> map, Deposit deposit) {
-            map[deposit.getId()] = deposit.name;
-            return map;
-        });
+        .fold(<int, String>{}, (Map<int, String> map, Deposit deposit) {
+      map[deposit.getId()] = deposit.name;
+      return map;
+    });
+  }
+
+  static void deleteDeposit(
+      BuildContext context, ExpensesTable table, Deposit deposit) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    provider
+        .findTable(table)
+        .depositList
+        .removeWhere((element) => element.getId() == deposit.getId());
+    provider.update();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/default_dialog_buttons.dart';
 import 'package:expensesapp/components/dialogs/information_dialog.dart';
 import 'package:expensesapp/constants/currency.dart';
 import 'package:expensesapp/constants/strings.dart';
@@ -12,7 +13,7 @@ import '../../../services/manage_deposit_service.dart';
 
 Future<void> showDepositDialog({
   required BuildContext context,
-  ExpensesTable? table,
+  required ExpensesTable table,
   Deposit? oldDeposit,
 }) {
   return showDialog<void>(
@@ -64,8 +65,7 @@ Future<void> showDepositDialog({
         if (_descriptionController.text.isEmpty) {
           showError(StringConsts.INVALID_DEPOSIT_DIALOG_TEXT_EMPTY_NAME);
           return false;
-        } else if (double.tryParse(previous.isEmpty ? '0' : previous) ==
-            null) {
+        } else if (double.tryParse(previous.isEmpty ? '0' : previous) == null) {
           showError(StringConsts.INVALID_DEPOSIT_DIALOG_TEXT_INVALID_PREVIOUS);
           return false;
         } else if (double.tryParse(increment.isEmpty ? '0' : increment) ==
@@ -95,58 +95,47 @@ Future<void> showDepositDialog({
                 controller: _previousController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: StringConsts.NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_LABEL,
-                  hintText: StringConsts.NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_PLACEHOLDER
-                ),
+                    labelText:
+                        StringConsts.NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_LABEL,
+                    hintText: StringConsts
+                        .NEW_DEPOSIT_DIALOG_PREVIOUS_VALUE_PLACEHOLDER),
               ),
               TextField(
                 controller: _incrementController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: StringConsts.NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_LABEL,
-                  hintText: StringConsts.NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_PLACEHOLDER
-                ),
+                    labelText:
+                        StringConsts.NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_LABEL,
+                    hintText: StringConsts
+                        .NEW_DEPOSIT_DIALOG_INCREMENT_VALUE_PLACEHOLDER),
               ),
             ],
           ),
         ),
-        actions: <Widget>[
-          OutlinedButton(
-            child:
-                const Text(StringConsts.NEW_DEPOSIT_DIALOG_CANCEL_BUTTON_TEXT),
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.red,
-              ),
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          ElevatedButton(
-            child:
-                const Text(StringConsts.NEW_DEPOSIT_DIALOG_CONFIRM_BUTTON_TEXT),
-            onPressed: () {
-              showConfirmationDialog(
-                context: context,
-                title: StringConsts.NEW_DEPOSIT_CONFIRMATION_DIALOG_TITLE,
-                text: oldDeposit == null
-                    ? StringConsts.NEW_DEPOSIT_CONFIRMATION_DIALOG_TEXT
-                    : StringConsts.EDIT_DEPOSIT_CONFIMATION_DIALOG_TEXT,
-                onConfirm: () {
-                  if (!validate()) return;
-                  if (oldDeposit == null) {
-                    ManageDepositService.addDepositToTable(
-                        context, table, genNewDeposit());
-                  } else {
-                    ManageDepositService.updateDeposit(
-                        context, table!, oldDeposit, genNewDeposit());
-                  }
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        ],
+        actions: generateDialogButtons(
+          context: context,
+          confirmationDialogTitle:
+              StringConsts.NEW_DEPOSIT_CONFIRMATION_DIALOG_TITLE,
+          confirmationDialogText: oldDeposit == null
+              ? StringConsts.NEW_DEPOSIT_CONFIRMATION_DIALOG_TEXT
+              : StringConsts.EDIT_DEPOSIT_CONFIMATION_DIALOG_TEXT,
+          confirmText: StringConsts.NEW_DEPOSIT_DIALOG_CONFIRM_BUTTON_TEXT,
+          confirmFunction: () {
+            if (!validate()) return;
+            if (oldDeposit == null) {
+              ManageDepositService.addDepositToTable(
+                  context, table, genNewDeposit());
+            } else {
+              ManageDepositService.updateDeposit(
+                  context, table, oldDeposit, genNewDeposit());
+            }
+          },
+          cancelText: StringConsts.NEW_DEPOSIT_DIALOG_CANCEL_BUTTON_TEXT,
+          deleteFunction: oldDeposit != null
+              ? () =>
+                  ManageDepositService.deleteDeposit(context, table, oldDeposit)
+              : null,
+        ),
       );
     },
   );

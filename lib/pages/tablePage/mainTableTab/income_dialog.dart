@@ -1,4 +1,4 @@
-import 'package:expensesapp/components/dialogs/confirmation_dialog.dart';
+import 'package:expensesapp/components/dialogs/default_dialog_buttons.dart';
 import 'package:expensesapp/components/dialogs/information_dialog.dart';
 import 'package:expensesapp/constants/currency.dart';
 import 'package:expensesapp/constants/strings.dart';
@@ -12,7 +12,7 @@ import '../../../models/income.dart';
 
 Future<void> showIncomeDialog({
   required BuildContext context,
-  ExpensesTable? table,
+  required ExpensesTable table,
   Income? oldIncome,
 }) {
   return showDialog<void>(
@@ -87,43 +87,30 @@ Future<void> showIncomeDialog({
             ],
           ),
         ),
-        actions: <Widget>[
-          OutlinedButton(
-            child:
-                const Text(StringConsts.NEW_INCOME_DIALOG_CANCEL_BUTTON_TEXT),
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(
-                color: Colors.red,
-              ),
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          ElevatedButton(
-            child:
-                const Text(StringConsts.NEW_INCOME_DIALOG_CONFIRM_BUTTON_TEXT),
-            onPressed: () {
-              showConfirmationDialog(
-                context: context,
-                title: StringConsts.NEW_INCOME_CONFIRMATION_DIALOG_TITLE,
-                text: oldIncome == null
-                    ? StringConsts.NEW_INCOME_CONFIRMATION_DIALOG_TEXT
-                    : StringConsts.EDIT_INCOME_CONFIMATION_DIALOG_TEXT,
-                onConfirm: () {
-                  if (!validate()) return;
-                  if (oldIncome == null) {
-                    ManageIncomeService.addIncomeToTable(
-                        context, table, genNewIncome());
-                  } else {
-                    ManageIncomeService.updateIncome(
-                        context, table!, oldIncome, genNewIncome());
-                  }
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-        ],
+        actions: generateDialogButtons(
+          context: context,
+          confirmText: StringConsts.NEW_INCOME_DIALOG_CONFIRM_BUTTON_TEXT,
+          confirmationDialogTitle:
+              StringConsts.NEW_INCOME_CONFIRMATION_DIALOG_TITLE,
+          confirmationDialogText: oldIncome == null
+              ? StringConsts.NEW_INCOME_CONFIRMATION_DIALOG_TEXT
+              : StringConsts.EDIT_INCOME_CONFIMATION_DIALOG_TEXT,
+          confirmFunction: () {
+            if (!validate()) return;
+            if (oldIncome == null) {
+              ManageIncomeService.addIncomeToTable(
+                  context, table, genNewIncome());
+            } else {
+              ManageIncomeService.updateIncome(
+                  context, table, oldIncome, genNewIncome());
+            }
+          },
+          cancelText: StringConsts.NEW_INCOME_DIALOG_CANCEL_BUTTON_TEXT,
+          deleteFunction: oldIncome != null
+              ? () =>
+                  ManageIncomeService.deleteIncome(context, table, oldIncome)
+              : null,
+        ),
       );
     },
   );

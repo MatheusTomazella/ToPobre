@@ -63,6 +63,11 @@ class StringConsts {
   // ---------------------------------------------------------------------------
   // DIALOGS
 
+  // Default Buttons
+  static const String DEFAULT_DELETION_DIALOG_TITLE = "Tem certeza?";
+  static const String DEFAULT_DELETION_DIALOG_TEXT =
+      "Tem certeza que quer deletar esse item? Essa ação não pode ser desfeita.";
+
   // Rename Dialog
   static const String RENAME_DIALOG_TITLE = "Renomear";
   static const String RENAME_DIALOG_PLACEHOLDER = "Novo nome";

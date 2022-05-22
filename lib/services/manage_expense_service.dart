@@ -41,4 +41,14 @@ class ManageExpenseService {
         .update(newExpense);
     provider.update();
   }
+
+  static void deleteExpense(
+      BuildContext context, ExpensesTable table, Expense expense) {
+    var provider = Provider.of<TablesNotifier>(context, listen: false);
+    provider
+        .findTable(table)
+        .expenseList
+        .removeWhere((element) => element.getId() == expense.getId());
+    provider.update();
+  }
 }
