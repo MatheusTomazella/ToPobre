@@ -11,9 +11,9 @@ class DatabaseService {
     return File(await getDatabasePath() + '/$databaseName.json');
   }
 
-  static void save(String serializedString, String databaseName) async {
+  static Future<File> save(String serializedString, String databaseName) async {
     final File file = await getFileReference(databaseName);
-    file.writeAsString(serializedString);
+    return file.writeAsString(serializedString);
   }
 
   static Future<String> load(String databaseName) async {

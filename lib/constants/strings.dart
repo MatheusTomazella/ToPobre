@@ -273,6 +273,8 @@ class StringConsts {
   static const TAG_BAR_DEFAULT_TITLE = "Comparação por Etiquetas";
   static const SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE = "Gasto x Depositado";
   static const SPENT_VS_INCOME_PIE_DEFAULT_TITLE = "Gasto x Entrada";
+  static const DEPOSIT_DISTRIBUTION_DOUBLE_BAR_DEFAULT_TITLE =
+      "Distribuição nos Depósitos";
 
   static const String BAR_CHART_TYPE = "barra";
   static const String PIE_CHART_TYPE = "pizza";

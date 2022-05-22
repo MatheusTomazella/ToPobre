@@ -16,7 +16,7 @@ class SerializationService {
 }
 
 extension TableSerializationExtension on ExpensesTable {
-  toJson() {
+  String toJson() {
     return jsonEncode(<String, dynamic>{
       'name': getName(),
       'creationDate': getCreationDate().toIso8601String(),

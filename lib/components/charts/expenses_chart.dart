@@ -43,6 +43,9 @@ class ExpensesChart extends StatelessWidget {
       case CHART_TYPES.TAG_BAR:
         // TODO: Handle this case.
         break;
+      case CHART_TYPES.DEPOSIT_DISTRIBUTION_DOUBLE_BAR:
+        // TODO: Handle this case.
+        break;
     }
 
     List<PopupMenuItem> options = [

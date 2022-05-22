@@ -17,5 +17,7 @@ String getDefaultChartTitle(CHART_TYPES type, {bool includeChartType = false}) {
       return StringConsts.SPENT_VS_DEPOSITED_PIE_DEFAULT_TITLE;
     case CHART_TYPES.SPENT_VS_INCOME_PIE:
       return StringConsts.SPENT_VS_INCOME_PIE_DEFAULT_TITLE;
+    case CHART_TYPES.DEPOSIT_DISTRIBUTION_DOUBLE_BAR:
+      return StringConsts.DEPOSIT_DISTRIBUTION_DOUBLE_BAR_DEFAULT_TITLE;
   }
 }

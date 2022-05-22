@@ -3,6 +3,7 @@ import 'package:expensesapp/components/dialogs/information_dialog.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/pages/tableListPage/rename_dialog.dart';
+import 'package:expensesapp/services/export_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -119,13 +120,14 @@ class TableListItem extends StatelessWidget {
             );
           } else if (value == 'info') {
             showInformationDialog(
-                context: context,
-                title: StringConsts.TABLE_DETAILS_DIALOG_TITLE,
-                text:
-                    "${StringConsts.TABLE_DETAILS_NAME_LABEL}:\n${table.getName()}\n\n"
-                    "${StringConsts.TABLE_DETAILS_CREATION_DATE_LABEL}:\n${DateFormat("yyyy-MM-dd hh:mm:ss")
-                        .format(table.getCreationDate().toUtc())}",
+              context: context,
+              title: StringConsts.TABLE_DETAILS_DIALOG_TITLE,
+              text:
+                  "${StringConsts.TABLE_DETAILS_NAME_LABEL}:\n${table.getName()}\n\n"
+                  "${StringConsts.TABLE_DETAILS_CREATION_DATE_LABEL}:\n${DateFormat("yyyy-MM-dd hh:mm:ss").format(table.getCreationDate().toUtc())}",
             );
+          } else if (value == 'export') {
+            ExportService.shareTable(table);
           }
         },
       ),

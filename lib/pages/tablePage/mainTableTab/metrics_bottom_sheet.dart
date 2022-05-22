@@ -21,7 +21,7 @@ Future<void> showMetricsBottomSheet({
     [StringConsts.METRIC_GROWTH, CalculateGrowthService.calculateReturnMoney(table).toString()],
     [
       StringConsts.METRIC_GROWTH_PERCENTAGE,
-      CalculateGrowthService.calculatePercentage(table).toString() + " %"
+      CalculateGrowthService.calculatePercentage(table).toStringAsFixed(1) + " %"
     ],
     [
       StringConsts.METRIC_TOTAL_DEPOSITED,
