@@ -21,7 +21,7 @@ class DeserializationService {
     return ExpensesTable.filled(
       map["name"],
       DateTime.parse(map["creationDate"]),
-      map["favorite"] == true,
+      map["favorite"] == "true",
       deserializeIncomeList(map["incomeList"]),
       deserializeDepositList(map["depositList"]),
       deserializeExpenseList(map["expenseList"]),
