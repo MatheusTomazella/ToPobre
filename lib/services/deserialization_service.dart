@@ -94,7 +94,7 @@ class DeserializationService {
       uuid: map['uuid'],
       title: map['title'],
       type: chartTypeFromString(map['type']),
-      tags: List<String>.from(map['tags']),
+      tags: map['tags'] == null ? null : List<String>.from(map['tags']),
     );
   }
 }

@@ -26,8 +26,8 @@ class ExpensesTable {
     setName(StringConsts.DEFAULT_TABLE_NAME);
     setCreationDate(DateTime.now());
     setFavorite(false);
-    incomeList = [Income(0)];
-    depositList = [Deposit(0)];
+    incomeList = [Income(1)];
+    depositList = [Deposit(1)];
     expenseList = [];
     tagList = [];
   }
