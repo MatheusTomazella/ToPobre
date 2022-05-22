@@ -1,6 +1,6 @@
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/pages/tablePage/expensesTab/expense_dialog.dart';
-import 'package:expensesapp/pages/tablePage/expensesTab/total_display.dart';
+import 'package:expensesapp/components/total_display.dart';
 import 'package:expensesapp/services/calculate_total_discount_service.dart';
 import 'package:expensesapp/services/manage_expense_service.dart';
 import 'package:flutter/material.dart';
@@ -48,8 +48,10 @@ class ExpensesTab extends StatelessWidget {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          TotalDisplay(
-              total: CalculateTotalDiscountService.fromList(table.expenseList)),
+          Flexible(child: 
+            TotalDisplay(
+                total: CalculateTotalDiscountService.fromList(table.expenseList)),
+          ),
           FloatingActionButton(
             heroTag: 'addExpense',
             onPressed: () => showExpenseDialog(context: context, table: table),

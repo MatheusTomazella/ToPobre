@@ -1,6 +1,9 @@
 import 'package:expensesapp/components/expenses_data_table.dart';
+import 'package:expensesapp/components/total_display.dart';
 import 'package:expensesapp/pages/tablePage/mainTableTab/deposit_dialog.dart';
 import 'package:expensesapp/pages/tablePage/mainTableTab/income_dialog.dart';
+import 'package:expensesapp/pages/tablePage/mainTableTab/metrics_bottom_sheet.dart';
+import 'package:expensesapp/services/calculate_total_after_discount_service.dart';
 import 'package:expensesapp/services/deposit_before_decrement_table_builder_service.dart';
 import 'package:expensesapp/services/income_table_builder_service.dart';
 import 'package:expensesapp/services/manage_income_service.dart';
@@ -81,6 +84,12 @@ class MainTableTab extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: TotalDisplay(
+        widthFactor: 0.95,
+        onTap: () => showMetricsBottomSheet(context: context, table: table),
+        total: CalculateTotalAfterDiscountService.calculateReturnMoney(table),
       ),
     ));
   }

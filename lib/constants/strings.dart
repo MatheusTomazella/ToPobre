@@ -51,6 +51,15 @@ class StringConsts {
   // Table Configurations
   static const String TABLE_CONFIG_TAG_TITLE = "Etiquetas";
 
+  // Metrics
+  static const String METRICS_TITLE = "Métricas";
+  static const String METRIC_GENERAL_TOTAL = "Total";
+  static const String METRIC_GROWTH = "Aumento";
+  static const String METRIC_GROWTH_PERCENTAGE = "Aumento (%)";
+  static const String METRIC_TOTAL_DEPOSITED = "Total Depositado";
+  static const String METRIC_TOTAL_INCOME = "Total de Entrada";
+  static const String METRIC_TOTAL_PREVIOUS = "Total Anterior";
+
   // ---------------------------------------------------------------------------
   // DIALOGS
 
