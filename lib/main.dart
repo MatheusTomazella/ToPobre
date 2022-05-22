@@ -9,9 +9,10 @@ import 'package:expensesapp/services/database_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expensesapp/constants/strings.dart';
-import 'package:provider/provider.dart';   
+import 'package:provider/provider.dart';
 
 const bool SERIALIZATION_ENABLED = true;
+const bool INSERT_EXAMPLE_TABLE_IF_NO_TABLE = true;
 
 void main() {
   runApp(const ExpensesApp());

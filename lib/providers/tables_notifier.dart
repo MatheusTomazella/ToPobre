@@ -1,4 +1,6 @@
+import 'package:expensesapp/main.dart';
 import 'package:expensesapp/services/table_database_service.dart';
+import 'package:expensesapp/utils/generate_example_table.dart';
 import 'package:flutter/widgets.dart';
 
 import '../constants/strings.dart';
@@ -13,6 +15,9 @@ class TablesNotifier extends ChangeNotifier {
   Future<bool> init() async {
     if (initialized) return true;
     _tables.addAll(await TableDatabaseService.loadTableList());
+    if (INSERT_EXAMPLE_TABLE_IF_NO_TABLE && _tables.isEmpty) {
+      _tables.add(generateExampleTable());
+    }
     initialized = true;
     return true;
   }

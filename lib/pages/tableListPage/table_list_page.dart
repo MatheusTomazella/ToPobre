@@ -20,7 +20,7 @@ class TableListPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(80),
         child: AppBar(
           title: const Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Text(
               StringConsts.LIST_PAGE_TITLE,
               style: TextStyle(color: Colors.red, fontSize: 30),

@@ -77,11 +77,18 @@ class MainTableTab extends StatelessWidget {
 
             // Deposit (after)
             const TableTitle(title: StringConsts.DEPOSIT_AFTER_TABLE_TITLE),
-            ExpensesDataTable(
-              headers: DepositAfterDecrementTableBuilderService.getHeaders(),
-              values: DepositAfterDecrementTableBuilderService.getValuesMatrix(
-                  table.depositList, table.expenseList),
+            // TODO: Figure out how to make table fill screen when landscape
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ExpensesDataTable(
+                headers: DepositAfterDecrementTableBuilderService.getHeaders(),
+                values:
+                    DepositAfterDecrementTableBuilderService.getValuesMatrix(
+                        table.depositList, table.expenseList),
+              ),
             ),
+
+            const SizedBox(height: 70),
           ],
         ),
       ),
