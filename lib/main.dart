@@ -6,6 +6,7 @@ import 'package:expensesapp/pages/tablePage/table_page.dart';
 import 'package:expensesapp/providers/tables_notifier.dart';
 import 'package:expensesapp/providers/tables_provider.dart';
 import 'package:expensesapp/services/database_service.dart';
+import 'package:expensesapp/components/quick_actions_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expensesapp/constants/strings.dart';
@@ -31,39 +32,59 @@ class ExpensesApp extends StatelessWidget {
       providers: [
         TablesProvider.getProvider(),
       ],
-      child: MaterialApp(
-        title: StringConsts.APP_TITLE,
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-          backgroundColor: Colors.white,
-        ),
-        routes: <String, WidgetBuilder>{
-          '/table': (BuildContext context) => Consumer<TablesNotifier>(
-                builder: (context, notifier, child) {
-                  if (notifier.currentTable == null) Navigator.pop(context);
-                  return TablePage(
-                    table: notifier.currentTable!,
-                  );
-                },
-              ),
-          '/table/config': (BuildContext context) => Consumer<TablesNotifier>(
-                builder: (context, notifier, child) {
-                  if (notifier.currentTable == null) Navigator.pop(context);
-                  return TableConfigPage(
-                    table: notifier.currentTable!,
-                  );
-                },
-              ),
-        },
-        home: Consumer<TablesNotifier>(
-            builder: (context, tableListNotifier, _) => FutureBuilder(
-                  future: Provider.of<TablesNotifier>(context, listen: false)
-                      .init(),
-                  builder: ((context, snapshot) => TableListPage(
-                        tables: tableListNotifier.getOrderedTables(),
-                      )),
-                )),
+      builder: (context, _) {
+        return QuickActionsManager(
+          child: App(),
+          onAction: (String actionType) {
+            switch (actionType) {
+              case 'action_test':
+                print(
+                    Provider.of<TablesNotifier>(context, listen: false).tables);
+                break;
+            }
+          },
+        );
+      },
+    );
+  }
+}
+
+// ignore: use_key_in_widget_constructors
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: StringConsts.APP_TITLE,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        backgroundColor: Colors.white,
       ),
+      routes: <String, WidgetBuilder>{
+        '/table': (BuildContext context) => Consumer<TablesNotifier>(
+              builder: (context, notifier, child) {
+                if (notifier.currentTable == null) Navigator.pop(context);
+                return TablePage(
+                  table: notifier.currentTable!,
+                );
+              },
+            ),
+        '/table/config': (BuildContext context) => Consumer<TablesNotifier>(
+              builder: (context, notifier, child) {
+                if (notifier.currentTable == null) Navigator.pop(context);
+                return TableConfigPage(
+                  table: notifier.currentTable!,
+                );
+              },
+            ),
+      },
+      home: Consumer<TablesNotifier>(
+          builder: (context, tableListNotifier, _) => FutureBuilder(
+                future:
+                    Provider.of<TablesNotifier>(context, listen: false).init(),
+                builder: ((context, snapshot) => TableListPage(
+                      tables: tableListNotifier.getOrderedTables(),
+                    )),
+              )),
     );
   }
 }
