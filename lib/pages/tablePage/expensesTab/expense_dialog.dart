@@ -2,6 +2,7 @@ import 'package:expensesapp/components/dialogs/default_dialog_buttons.dart';
 import 'package:expensesapp/models/expense.dart';
 import 'package:expensesapp/utils/format_date.dart';
 import 'package:expensesapp/utils/get_first_deposit_id.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
@@ -26,7 +27,7 @@ Future<void> showExpenseDialog({
         text: oldExpense?.getDescription() ?? '',
       );
       TextEditingController _valueController = TextEditingController(
-        text: oldExpense?.getValue().toString() ?? '',
+        text: oldExpense?.getValue().toFormattedString() ?? '',
       );
       DateTime date = oldExpense?.getDate() ?? DateTime.now();
       int depositId = oldExpense?.getDepositId() ?? getFirstDepositId(table);

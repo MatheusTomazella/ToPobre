@@ -2,6 +2,7 @@ import 'package:expensesapp/components/expense_tag_chip.dart';
 import 'package:expensesapp/constants/color.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/expense.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 
 import '../models/expenses_table.dart';
@@ -20,7 +21,7 @@ class ExpensesTableBuilderService {
         expense.getId().toString(),
         expense.getFormattedDate(),
         expense.getDescription(),
-        expense.getValue().toString(),
+        expense.getValue().toFormattedString(),
         table.depositList
             .firstWhere((e) => e.getId() == expense.getDepositId())
             .getName(),

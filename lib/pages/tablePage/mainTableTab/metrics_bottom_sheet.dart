@@ -6,6 +6,7 @@ import 'package:expensesapp/services/calculate_total_after_discount_service.dart
 import 'package:expensesapp/services/calculate_total_deposited_service.dart';
 import 'package:expensesapp/services/calculate_total_income_service.dart';
 import 'package:expensesapp/services/calculate_total_previous_service.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
@@ -16,28 +17,34 @@ Future<void> showMetricsBottomSheet({
   var data = [
     [
       StringConsts.METRIC_GENERAL_TOTAL,
-      CalculateTotalAfterDiscountService.calculateReturnMoney(table).toString()
+      CalculateTotalAfterDiscountService.calculateReturnMoney(table)
+          .toFormattedString()
     ],
-    [StringConsts.METRIC_GROWTH, CalculateGrowthService.calculateReturnMoney(table).toString()],
+    [
+      StringConsts.METRIC_GROWTH,
+      CalculateGrowthService.calculateReturnMoney(table).toFormattedString()
+    ],
     [
       StringConsts.METRIC_GROWTH_PERCENTAGE,
-      CalculateGrowthService.calculatePercentage(table).toStringAsFixed(1) + " %"
+      CalculateGrowthService.calculatePercentage(table).toStringAsFixed(1) +
+          " %"
     ],
     [
       StringConsts.METRIC_TOTAL_DEPOSITED,
       Money.fromNum(CalculateTotalDepositedService.calculate(table),
               code: CurrencyConsts.DEFAULT_CURRENCY_CODE)
-          .toString()
+          .toFormattedString()
     ],
     [
       StringConsts.METRIC_TOTAL_INCOME,
       Money.fromNum(CalculateTotalIncomeService.calculate(table),
               code: CurrencyConsts.DEFAULT_CURRENCY_CODE)
-          .toString()
+          .toFormattedString()
     ],
     [
       StringConsts.METRIC_TOTAL_PREVIOUS,
-      CalculateTotalPreviousService.calculateReturnMoney(table).toString()
+      CalculateTotalPreviousService.calculateReturnMoney(table)
+          .toFormattedString()
     ],
   ];
 

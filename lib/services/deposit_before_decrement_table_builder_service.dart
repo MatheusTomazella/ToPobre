@@ -1,5 +1,6 @@
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/deposit.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 
 class DepositBeforeDecrementTableBuilderService {
 
@@ -32,9 +33,9 @@ class DepositBeforeDecrementTableBuilderService {
   static List<String> _getValues(Deposit deposit) => [
         deposit.getId().toString(),
         deposit.getName(),
-        deposit.getPrevious().toString(),
-        deposit.getIncrement().toString(),
-        deposit.getBeforeDiscount().toString(),
+        deposit.getPrevious().toFormattedString(),
+        deposit.getIncrement().toFormattedString(),
+        deposit.getBeforeDiscount().toFormattedString(),
       ];
 
   static List<List<String>> getValuesMatrix(List<Deposit> deposits) =>

@@ -1,5 +1,6 @@
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/income.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 
 class IncomeTableBuilderService {
   static List<String> getHeaders() => [
@@ -11,7 +12,7 @@ class IncomeTableBuilderService {
   static List<String> _getValues(Income income) => [
         income.getId().toString(),
         income.getDescription(),
-        income.getValue().toString()
+        income.getValue().toFormattedString()
       ];
 
   static List<List<String>> getValuesMatrix(List<Income> incomes) =>

@@ -4,6 +4,7 @@ import 'package:expensesapp/constants/currency.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/services/manage_income_service.dart';
 import 'package:expensesapp/utils/clean_money_string.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
@@ -22,7 +23,7 @@ Future<void> showIncomeDialog({
         text: oldIncome?.getDescription() ?? '',
       );
       TextEditingController _valueController = TextEditingController(
-        text: oldIncome?.getValue().toString() ?? '',
+        text: oldIncome?.getValue().toFormattedString() ?? '',
       );
 
       Income genNewIncome() {

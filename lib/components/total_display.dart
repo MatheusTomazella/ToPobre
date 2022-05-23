@@ -1,3 +1,4 @@
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
@@ -27,7 +28,7 @@ class TotalDisplay extends StatelessWidget {
             margin: const EdgeInsetsDirectional.only(start: 10),
             padding: const EdgeInsets.all(10),
             child: Text(
-              total.toString(),
+              total.toFormattedString(),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,

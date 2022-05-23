@@ -4,6 +4,7 @@ import 'package:expensesapp/constants/currency.dart';
 import 'package:expensesapp/constants/strings.dart';
 import 'package:expensesapp/models/deposit.dart';
 import 'package:expensesapp/utils/clean_money_string.dart';
+import 'package:expensesapp/utils/money_to_formatted_string.dart';
 import 'package:flutter/material.dart';
 import 'package:money2/money2.dart';
 
@@ -22,10 +23,10 @@ Future<void> showDepositDialog({
         text: oldDeposit?.getName() ?? '',
       );
       TextEditingController _previousController = TextEditingController(
-        text: oldDeposit?.getPrevious().toString() ?? '',
+        text: oldDeposit?.getPrevious().toFormattedString() ?? '',
       );
       TextEditingController _incrementController = TextEditingController(
-        text: oldDeposit?.getIncrement().toString() ?? '',
+        text: oldDeposit?.getIncrement().toFormattedString() ?? '',
       );
 
       Deposit genNewDeposit() {

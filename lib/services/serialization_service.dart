@@ -4,7 +4,7 @@ import 'package:expensesapp/models/chart_model.dart';
 import 'package:expensesapp/models/expense_tag.dart';
 import 'package:expensesapp/models/expenses_table.dart';
 import 'package:expensesapp/utils/color_utils.dart';
-import 'package:expensesapp/utils/money_to_string.dart';
+import 'package:expensesapp/utils/money_to_clean_money_string.dart';
 import '../models/deposit.dart';
 import '../models/expense.dart';
 import '../models/income.dart';
@@ -35,7 +35,7 @@ extension IncomeSerializationExtension on Income {
     return jsonEncode(<String, String>{
       'id': getId().toString(),
       'description': getDescription(),
-      'value': moneyToString(getValue()),
+      'value': moneyToCleanMoneyString(getValue()),
     });
   }
 }
@@ -45,8 +45,8 @@ extension DepositSerializationExtension on Deposit {
     return jsonEncode(<String, String>{
       'id': getId().toString(),
       'name': getName(),
-      'previous': moneyToString(getPrevious()),
-      'increment': moneyToString(getIncrement()),
+      'previous': moneyToCleanMoneyString(getPrevious()),
+      'increment': moneyToCleanMoneyString(getIncrement()),
     });
   }
 }
@@ -58,7 +58,7 @@ extension ExpenseSerializationExtension on Expense {
       'date': getDate().toIso8601String(),
       'description': getDescription(),
       'depositId': getDepositId().toString(),
-      'value': moneyToString(getValue()),
+      'value': moneyToCleanMoneyString(getValue()),
       'tags': getTags(),
     });
   }
