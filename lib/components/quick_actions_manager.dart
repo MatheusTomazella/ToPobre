@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:quick_actions/quick_actions.dart';
 
 // ignore: must_be_immutable
-class QuickActionsManager extends StatelessWidget {
+class QuickActionsManager {
   final QuickActions _quickActions = const QuickActions();
-  Widget child;
+  List<ShortcutItem> items;
   Function(String actionType) onAction;
 
-  QuickActionsManager({Key? key, required this.child, required this.onAction}) : super(key: key) {
+  QuickActionsManager({required this.onAction, required this.items}) {
     initialize();
   }
 
@@ -17,13 +16,6 @@ class QuickActionsManager extends StatelessWidget {
   }
 
   void setShortcutItems() {
-    _quickActions.setShortcutItems(<ShortcutItem>[
-      const ShortcutItem(type: 'action_test', localizedTitle: "Test"),
-    ]);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
+    _quickActions.setShortcutItems(items);
   }
 }

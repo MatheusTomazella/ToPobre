@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:expensesapp/constants/strings.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_actions/quick_actions.dart';
 
 const bool SERIALIZATION_ENABLED = true;
 const bool INSERT_EXAMPLE_TABLE_IF_NO_TABLE = true;
@@ -32,19 +33,7 @@ class ExpensesApp extends StatelessWidget {
       providers: [
         TablesProvider.getProvider(),
       ],
-      builder: (context, _) {
-        return QuickActionsManager(
-          child: App(),
-          onAction: (String actionType) {
-            switch (actionType) {
-              case 'action_test':
-                print(
-                    Provider.of<TablesNotifier>(context, listen: false).tables);
-                break;
-            }
-          },
-        );
-      },
+      child: App(),
     );
   }
 }
@@ -78,13 +67,52 @@ class App extends StatelessWidget {
             ),
       },
       home: Consumer<TablesNotifier>(
-          builder: (context, tableListNotifier, _) => FutureBuilder(
-                future:
-                    Provider.of<TablesNotifier>(context, listen: false).init(),
-                builder: ((context, snapshot) => TableListPage(
-                      tables: tableListNotifier.getOrderedTables(),
-                    )),
-              )),
+        builder: (context, tableListNotifier, _) => FutureBuilder(
+          future: Provider.of<TablesNotifier>(context, listen: false).init(),
+          builder: (context, snapshot) {
+            try {
+              QuickActionsManager(
+                items: () {
+                  var provider =
+                      Provider.of<TablesNotifier>(context, listen: false);
+                  List<ShortcutItem> items = [];
+                  for (var i = 0; i < 5 && i < provider.tables.length; i++) {
+                    var table = provider.tables[i];
+                    if (!table.getFavorite()) continue;
+                    items.add(ShortcutItem(
+                      type: 'table_$i',
+                      localizedTitle: provider.tables[i].getName(),
+                      icon: 'add_icon'
+                    ));
+                  }
+                  return items;
+                }(),
+                onAction: (String actionType) {
+                  var provider =
+                      Provider.of<TablesNotifier>(context, listen: false);
+                  if (actionType.startsWith('table')) {
+                    var index = actionType.split('_')[1];
+                    provider.selectTable(provider.tables[int.parse(index)]);
+                    Navigator.pushNamed(context, '/table', arguments: {'go_to_add_expense': true});
+                    return;
+                  }
+                },
+              );
+
+              return TableListPage(
+                tables: tableListNotifier.getOrderedTables(),
+              );
+            } catch (e) {
+              return Container(
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                color: Colors.white,
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 }

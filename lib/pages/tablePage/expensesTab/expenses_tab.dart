@@ -10,14 +10,30 @@ import '../../../components/table_title.dart';
 import '../../../constants/strings.dart';
 import '../../../services/expenses_table_builder_service.dart';
 
+bool argsRead = false;
+
 // ignore: must_be_immutable
 class ExpensesTab extends StatelessWidget {
   ExpensesTable table;
+  Map<String, dynamic> args;
 
-  ExpensesTab({Key? key, required this.table}) : super(key: key);
+  ExpensesTab({Key? key, required this.table, this.args = const {}})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      if (argsRead) return;
+      argsRead = true;
+      if (args['openAddModal'] == true) {
+        args['openAddModal'] = false;
+        showExpenseDialog(
+          context: context,
+          table: table,
+        );
+      }
+    });
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.white,
@@ -32,7 +48,9 @@ class ExpensesTab extends StatelessWidget {
               child: ExpensesDataTable.usingRows(
                 headers: ExpensesTableBuilderService.getHeaders(),
                 rows: ExpensesTableBuilderService.getRows(
-                    table.expenseList..sort(((a, b) => a.getDate().compareTo(b.getDate()))), table, (List<String> row) {
+                    table.expenseList
+                      ..sort(((a, b) => a.getDate().compareTo(b.getDate()))),
+                    table, (List<String> row) {
                   showExpenseDialog(
                     context: context,
                     table: table,
@@ -48,9 +66,10 @@ class ExpensesTab extends StatelessWidget {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Flexible(child: 
-            TotalDisplay(
-                total: CalculateTotalDiscountService.fromList(table.expenseList)),
+          Flexible(
+            child: TotalDisplay(
+                total:
+                    CalculateTotalDiscountService.fromList(table.expenseList)),
           ),
           FloatingActionButton(
             heroTag: 'addExpense',

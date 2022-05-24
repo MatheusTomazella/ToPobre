@@ -73,13 +73,28 @@ class _TablePageState extends State<TablePage> with TickerProviderStateMixin {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: TabBarView(
-        controller: tabcontroller,
-        children: <Widget>[
-          MainTableTab(table: widget.table),
-          ExpensesTab(table: widget.table),
-          ChartsTab(table: widget.table),
-        ],
+      body: Builder(
+        builder: (context) {
+          final goToAddExpense = (ModalRoute.of(context)!.settings.arguments
+                  as Map<String, bool>?)?['go_to_add_expense'] ??
+              false;
+
+          Map<String, dynamic> expensesArgs = {};
+
+          if (goToAddExpense) {
+            tabcontroller.animateTo(1);
+            expensesArgs['openAddModal'] = true;
+          }
+
+          return TabBarView(
+            controller: tabcontroller,
+            children: <Widget>[
+              MainTableTab(table: widget.table),
+              ExpensesTab(table: widget.table, args: expensesArgs),
+              ChartsTab(table: widget.table),
+            ],
+          );
+        },
       ),
     );
   }
